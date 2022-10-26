@@ -53,6 +53,13 @@ function createWindow() {
     win.loadFile('index.html')
 }
 
+async function deleteCurrentFiles(){
+    const files = await Fs.readdir(config.output_directory_path);
+    for(const file of files){
+        Fs.rm(path.join(config.output_directory_path, file))
+    }
+}
+
 async function moveFiles(name){
     const matchedFiles = []
 
@@ -77,7 +84,9 @@ async function moveFiles(name){
     }
 }
 
-function sendGroup(){
+async function sendGroup(){
+    await deleteCurrentFiles()
+    
     let nexts = [
         100 + nextGroupNumber, 
         200 + nextGroupNumber,
