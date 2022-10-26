@@ -2,14 +2,26 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' ; script-src 'self'">
+    <link rel="stylesheet" type="text/css" href=".\node_modules\bootstrap\dist\css\bootstrap.min.css">
+    <title>Bastion 2222 - Séparateur d'amitié</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    Nous utilisons Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    et Electron <span id="electron-version"></span>.
-  </body>
+    <div class="card">
+        <div class="card-body flex-column align-items-center">
+            <div><button class="btn btn-primary btn-xl" id="pause-btn"><strong>pause</strong></button></div>
+            <div><button class="btn btn-primary btn-xl" id="start-btn"><strong>reprendre</strong></button></div>
+            
+            
+            <h1 id="timer" class="m-4">XX:XX</h1>
+            <div class="d-flex align-items-center">
+                <p id="group-0">dernier groupe 1</p>
+                <p id="group-1">dernier groupe 2</p>
+                <p id="group-2">dernier groupe 3</p>
+                <p id="group-3">dernier groupe 4</p>
+            </div>
+        </div>
+    </div>
+</body>
+<script nonce="renderer" src="./scripts/renderer.js"></script>
 </html>
