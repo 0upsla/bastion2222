@@ -1,30 +1,47 @@
 {
   "devDependencies": {
-    "@electron-forge/cli": "^6.0.0-beta.68",
-    "@electron-forge/maker-deb": "^6.0.0-beta.68",
-    "@electron-forge/maker-rpm": "^6.0.0-beta.68",
-    "@electron-forge/maker-squirrel": "^6.0.0-beta.68",
-    "@electron-forge/maker-zip": "^6.0.0-beta.68",
-    "electron": "^21.2.0"
+    "electron": "^21.2.0",
+    "electron-builder": "^23.6.0"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.2",
-    "electron-squirrel-startup": "^1.0.0"
+    "bootstrap": "^5.2.2"
   },
   "name": "bastion2222",
   "version": "1.0.0",
   "description": "group picker for bastion 2222",
   "main": "main.js",
   "scripts": {
-    "app": "electron .",
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "author": "alois christen",
   "license": "ISC",
-  "config": {
-    "forge": "./forge.config.js"
-  }
+  "build": {
+    "appId": "com.electron.bastion_2222",
+    "productName": "Bastion 22222",
+    "asar": false, 
+    "mac": {
+      "target": [
+        "pkg"
+      ],
+      "entitlements": "entitlements.mac.plist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "msi",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+}
 }

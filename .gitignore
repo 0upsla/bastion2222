@@ -7,3 +7,4 @@ dist
 *.tgz
 *.log
 out/
+secrets/
