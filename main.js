@@ -12,7 +12,8 @@ const default_config = {
     "output_directory_path": path.join(homeDir, "Desktop/dossier2"),
     "start_time": "18:55",
     "end_pause_time": "21:55",
-    "time_between_group": 300
+    "time_between_group": 300,
+    "first_iteration": 1
 }
 
 let sample_data = path.join(homeDir, "Desktop/dossier0");
@@ -36,12 +37,7 @@ function saveConfig(config){
 }
 
 let config = default_config;
-let nextGroupNumber = 1;
-loadConfig().then((c) => {
-    config = c;
-    saveConfig(config);
-})
-
+let nextGroupNumber = config.first_iteration;
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -97,7 +93,13 @@ function sendGroup(){
     return nexts
 }
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
+    await loadConfig().then((c) => {
+        config = c;
+        nextGroupNumber = config.first_iteration;
+        saveConfig(config);
+    })
+    
     createWindow();
 })
 

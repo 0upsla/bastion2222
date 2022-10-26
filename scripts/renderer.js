@@ -17,10 +17,22 @@ function updateTimer(timer){
     document.querySelector('#timer-group').innerText = text;
 }
 
+function setTime(html_id, time){
+    let minutes = time.split(':')[1].padStart(2, '0')
+    let hours = time.split(':')[0].padStart(2,0)
+
+    let ele = document.querySelector(`#${html_id}`)
+    if(ele){
+        ele.innerHTML = `${hours}:${minutes}`
+    }
+}
+
 let timer = null;
 let wakeUpTimers = {};
 let duration = 300;
 let currentTimer = duration;
+
+
 function startTimer(){
     if(timer == null){
         timer = setInterval(() => {
@@ -31,6 +43,7 @@ function startTimer(){
                 checkFolder();
             }
         }, 1000)
+        showOneTimer()
     }
 }
 
@@ -38,6 +51,7 @@ function pauseTimer(){
     if(timer != null){
         clearInterval(timer)
         timer = null;
+        showOneTimer();
     }
 }
 
@@ -58,11 +72,37 @@ function parseTime(time){
 function startTimerAt(hour){
     let time = parseTime(hour);
     let delay = (time.getTime() - (new Date()).getTime());
-    console.log(hour, delay)
     if(delay > 0){
         clearTimeout(wakeUpTimers[hour]);
-        wakeUpTimers[hour] = setTimeout(startTimer, delay)
+        let newTimer = setTimeout(()=> {
+            delete wakeUpTimers[hour];
+            startTimer();
+            showOneTimer();
+        }, delay)
+        wakeUpTimers[hour] = newTimer
     }
+}
+
+function showOneTimer(){
+    let currentTimer = document.querySelector('#timer-group-div')
+    let startTimer = document.querySelector('#timer-start-div')
+    let pauseTimer = document.querySelector('#timer-pause-div')
+    let end = document.querySelector('#end-div')
+    currentTimer.classList.add('d-none')
+    startTimer.classList.add('d-none')
+    pauseTimer.classList.add('d-none')
+    end.classList.add('d-none')
+    if(timer != null){
+        currentTimer.classList.remove('d-none');
+    }
+    else if(Object.keys(wakeUpTimers).length >= 2){
+        startTimer.classList.remove('d-none');
+    } else if(Object.keys(wakeUpTimers).length === 1){
+        pauseTimer.classList.remove('d-none');
+    } else {
+        end.classList.remove('d-none');
+    }
+
 }
 
 async function setup(){
@@ -73,8 +113,13 @@ async function setup(){
     duration = config['time_between_group']
     currentTimer = duration;
     
+    setTime("timer-start", config.start_time)
+    setTime("timer-pause", config.end_pause_time)
+
     startTimerAt(config.start_time);
     startTimerAt(config.end_pause_time);
+
+    showOneTimer();
 }
 
 setup();
