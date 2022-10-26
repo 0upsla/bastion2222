@@ -5,7 +5,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.2"
+    "bootstrap": "^5.2.2",
+    "fs-extra": "^10.1.0"
   },
   "name": "bastion2222",
   "version": "1.0.0",
@@ -19,8 +20,10 @@
   "license": "ISC",
   "build": {
     "appId": "com.electron.bastion_2222",
-    "productName": "Bastion 22222",
-    "asar": false, 
+    "productName": "Bastion_2222",
+    "cscLink": "../secrets/cert.pfx",
+    "cscKeyPassword": "Bastion_2222",
+    "asar": false,
     "mac": {
       "target": [
         "pkg"
@@ -43,5 +46,5 @@
         }
       ]
     }
-}
+  }
 }

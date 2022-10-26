@@ -7,21 +7,33 @@
     <title>Bastion 2222 - Séparateur d'amitié</title>
   </head>
   <body>
-    <div class="card">
-        <div class="card-body flex-column align-items-center">
-            <div><button class="btn btn-primary btn-xl" id="pause-btn"><strong>pause</strong></button></div>
-            <div><button class="btn btn-primary btn-xl" id="start-btn"><strong>reprendre</strong></button></div>
-            
-            
-            <h1 id="timer" class="m-4">XX:XX</h1>
-            <div class="d-flex align-items-center">
-                <p id="group-0">dernier groupe 1</p>
-                <p id="group-1">dernier groupe 2</p>
-                <p id="group-2">dernier groupe 3</p>
-                <p id="group-3">dernier groupe 4</p>
-            </div>
+    <div class="d-flex ">
+    <div class="card w-25">
+      <div class="card-header text-bg-primary">Contrôles</div>
+        <div class="card-body d-flex flex-column d-grid gap-2">
+            <button class="m-1 btn btn-primary btn-lg btn-block" id="start-btn"><strong>start</strong></button>
+            <button class="m-1 btn btn-danger btn-lg btn-block" id="pause-btn"><strong>pause</strong></button>
         </div>
     </div>
+    <div class="card w-25">
+      <div class="card-header text-bg-primary">Timers</div>
+        <div class="card-body d-grid gap-2">
+          <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-group-div">
+            <h3>Timer jusqu'au prochain groupe</h3>
+            <h1 id="timer-group" class="m-4">XX:XX</h1>
+          </div>
+          <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-start-div">
+            <h3>Départ à :</h3>
+            <h1 id="timer-start" class="m-4">XX:XX</h1>
+          </div>
+          <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-pause-div">
+            <h3>Reprise à :</h3>
+            <h1 id="timer-pause" class="m-4">XX:XX</h1>
+          </div>
+            
+        </div>
+    </div>
+  </div>
 </body>
 <script nonce="renderer" src="./scripts/renderer.js"></script>
 </html>
