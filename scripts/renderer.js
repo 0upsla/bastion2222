@@ -3,6 +3,21 @@ function padded(anything){
     return anything.toString().padStart(2, '0')
 }
 
+async function blink(){
+    let count = 6;
+    let interval = setInterval(() => {
+        count--;
+        if(count < 0){
+            clearInterval(interval)
+        }
+        let blinkers = document.querySelectorAll('.blinking')
+        console.log(blinkers)
+        blinkers.forEach((ele) => {
+            ele.classList.toggle('text-bg-danger')
+        })        
+    }, 500)
+}
+
 async function callNextGroup(){
   document.querySelector('#last-group-number').innerHTML = nextGroupNumber;
   let currentCall = new Date();
@@ -12,6 +27,7 @@ async function callNextGroup(){
   let group = await server.sendGroup();
   nextGroupNumber = await server.nextGroupNumber();
   document.querySelector('#next-group-number').innerHTML = nextGroupNumber;
+  blink();
 }
 
 function updateTimer(timer){

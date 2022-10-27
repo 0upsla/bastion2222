@@ -10,8 +10,8 @@ const { machine } = require('os');
 const default_config = {
     "input_directory_path": path.join(homeDir, "Desktop/dossier1"),
     "output_directory_path": path.join(homeDir, "Desktop/dossier2"),
-    "start_time": "18:55",
-    "end_pause_time": "21:55",
+    "start_time": "18:50",
+    "end_pause_time": "21:50",
     "time_between_group": 300,
     "first_iteration": 1
 }
