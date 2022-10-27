@@ -50,6 +50,7 @@ function createWindow() {
     })
     ipcMain.handle('config', () => config)
     ipcMain.handle('sendGroup', () => sendGroup())
+    ipcMain.handle('nextGroupNumber', () => {return nextGroupNumber})
     win.loadFile('index.html')
 }
 
@@ -60,7 +61,7 @@ async function deleteCurrentFiles(){
     }
 }
 
-async function moveFiles(name){
+async function copyFile(name){
     const matchedFiles = []
 
     const files = await Fs.readdir(config.input_directory_path);
@@ -68,7 +69,7 @@ async function moveFiles(name){
         const filename = path.parse(file).name
         if(filename.endsWith(name)){
             matchedFiles.push(filename)
-            fs_extra.move(
+            fs_extra.copyFile(
                 path.join(config.input_directory_path, file),
                 path.join(config.output_directory_path, file),
                 function(err){
@@ -78,14 +79,13 @@ async function moveFiles(name){
             )
         }
     }
-
-    for(const file of files){
-
-    }
 }
 
 async function sendGroup(){
-    await deleteCurrentFiles()
+    try{
+        await deleteCurrentFiles()
+    } catch {}
+    
     
     let nexts = [
         100 + nextGroupNumber, 
@@ -94,7 +94,9 @@ async function sendGroup(){
         400 + nextGroupNumber
     ]
     for(let n of nexts){
-        moveFiles(n + "")
+        try {
+            copyFile(n + "")
+        } catch {}
     }
 
     nextGroupNumber++

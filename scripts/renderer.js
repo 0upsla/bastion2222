@@ -1,26 +1,29 @@
 
-async function checkFolder(){
+function padded(anything){
+    return anything.toString().padStart(2, '0')
+}
+
+async function callNextGroup(){
+  document.querySelector('#last-group-number').innerHTML = nextGroupNumber;
+  let currentCall = new Date();
+  let hour = padded(currentCall.getHours())
+  let minute = padded(currentCall.getMinutes())
+  document.querySelector('#last-group-time').innerHTML = `${hour}:${minute}`
   let group = await server.sendGroup();
-  /*
-  for(let i = 0; i < group.length; i++){
-    let p = document.querySelector(`#group-${i}`)
-    console.log(p)
-    p.innerHTML = group[i]
-  }
-  */
+  nextGroupNumber = await server.nextGroupNumber();
+  document.querySelector('#next-group-number').innerHTML = nextGroupNumber;
 }
 
 function updateTimer(timer){
-    let seconds = (timer % 60).toString().padStart(2, '0');
-    let minutes = ((timer - seconds) / 60).toString().padStart(2, '0');
+    let seconds = padded(timer % 60);
+    let minutes = padded((timer - seconds) / 60);
     let text = `${minutes}:${seconds}`
     document.querySelector('#timer-group').innerText = text;
 }
 
 function setTime(html_id, time){
-    let minutes = time.split(':')[1].padStart(2, '0')
-    let hours = time.split(':')[0].padStart(2,0)
-
+    let minutes = padded(time.split(':')[1])
+    let hours = padded(time.split(':')[0])
     let ele = document.querySelector(`#${html_id}`)
     if(ele){
         ele.innerHTML = `${hours}:${minutes}`
@@ -31,7 +34,7 @@ let timer = null;
 let wakeUpTimers = {};
 let duration = 300;
 let currentTimer = duration;
-
+let nextGroupNumber = 0;
 
 function startTimer(){
     if(timer == null){
@@ -40,7 +43,7 @@ function startTimer(){
             updateTimer(currentTimer)
             if(currentTimer <= 0){
                 currentTimer = duration
-                checkFolder();
+                callNextGroup();
             }
         }, 1000)
         showOneTimer()
@@ -92,6 +95,7 @@ function showOneTimer(){
     startTimer.classList.add('d-none')
     pauseTimer.classList.add('d-none')
     end.classList.add('d-none')
+    document.querySelector('#next-group-number').innerHTML = nextGroupNumber;
     if(timer != null){
         currentTimer.classList.remove('d-none');
     }
@@ -110,6 +114,7 @@ async function setup(){
     document.querySelector("#start-btn").addEventListener("click", () => startTimer());
 
     let config = await server.getConfig();
+    nextGroupNumber = await server.nextGroupNumber();
     duration = config['time_between_group']
     currentTimer = duration;
     

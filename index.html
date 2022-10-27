@@ -7,36 +7,45 @@
     <title>Bastion 2222 - Séparateur d'amitié</title>
   </head>
   <body>
-    <div class="d-flex p-2">
-    <div class="card w-25">
-      <div class="card-header text-bg-primary">Contrôles</div>
-        <div class="card-body d-flex flex-column d-grid gap-2">
-            <button class="m-1 btn btn-primary btn-lg btn-block" id="start-btn"><strong>start</strong></button>
-            <button class="m-1 btn btn-danger btn-lg btn-block" id="pause-btn"><strong>pause</strong></button>
+    <div class="d-flex flex-column p-2">
+      <div class="d-flex p-2 h-50">
+        <div class="card w-25">
+          <div class="card-header text-bg-primary">Contrôles</div>
+            <div class="card-body d-flex flex-column d-grid gap-2">
+                <button class="m-1 btn btn-primary btn-lg btn-block" id="start-btn"><strong>start</strong></button>
+                <button class="m-1 btn btn-danger btn-lg btn-block" id="pause-btn"><strong>pause</strong></button>
+            </div>
         </div>
-    </div>
-    <div class="card w-75">
-      <div class="card-header text-bg-primary">Timers</div>
-        <div class="card-body d-grid gap-2">
-          <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-group-div">
-            <h3>Timer jusqu'au prochain groupe</h3>
-            <h1 id="timer-group" class="m-4">XX:XX</h1>
-          </div>
-          <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-start-div">
-            <h3>Départ à :</h3>
-            <h1 id="timer-start" class="m-4">XX:XX</h1>
-          </div>
-          <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-pause-div">
-            <h3>Reprise à :</h3>
-            <h1 id="timer-pause" class="m-4">XX:XX</h1>
-          </div>
-          <div class="m-2 p-1 d-flex flex-column align-items-center" id="end-div">
-            <h1 class="m-4">Actuellement en pause</h1>
-          </div>
-            
+        <div class="card w-75">
+          <div class="card-header text-bg-primary">Timers</div>
+            <div class="card-body d-grid gap-2">
+              <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-group-div">
+                <h3>Timer jusqu'au prochain appel</h3>
+                <h1 id="timer-group" class="m-4">XX:XX</h1>
+              </div>
+              <div class="m-2 p-1 d-flex flex-column align-items-center" id="end-div">
+                <h1 class="m-4">Actuellement en pause</h1>
+              </div>
+              <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-start-div">
+                <h3>Départ automatique à :</h3>
+                <h1 id="timer-start" class="m-4">XX:XX</h1>
+              </div>
+              <div class="m-2 p-1 d-flex flex-column align-items-center" id="timer-pause-div">
+                <h3>Reprise automatique à :</h3>
+                <h1 id="timer-pause" class="m-4">XX:XX</h1>
+              </div>
+            </div>
         </div>
+      </div>
+      <div class="card w-100 h-50">
+        <div class="card-header text-bg-primary">Informations</div>
+          <div class="card-body d-flex flex-column d-grid gap-2">
+            <h3>Prochain groupe prévu : <strong id="next-group-number">???</strong></h3>
+            <h3>Dernier groupe appelé : <strong id="last-group-number">???</strong></h3>
+            <h3>Heure du dernier appel : <strong id="last-group-time">XX:XX</strong></h3>
+          </div>
+      </div>
     </div>
-  </div>
 </body>
 <script nonce="renderer" src="./scripts/renderer.js"></script>
 </html>
